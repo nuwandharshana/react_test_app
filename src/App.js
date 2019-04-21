@@ -12,12 +12,12 @@ class App extends Component {
     otherState:'another state value'
   }
 
-  switchNameHandler = () => {
-    // this.state.persons[0].name = // dont use , react wont identify state changes and rerender dom
+  switchNameHandler = (newName) => {
+    // this.state.persons[0].name = // dont use , react wont identify state changes to rerender dom
     this.setState({
       persons:[
         {name:"Dhanushka Rumesh", age:40},
-        {name:"Hasantha Prabath", age:27},
+        {name:newName, age:27},
         {name:"Pramith Chathuranga", age:30},
       ]
     })
@@ -26,12 +26,21 @@ class App extends Component {
   render() {
     return (
       //use one root element
+      //bind method is more efficient than () => this.switchNameHandler('maximilian')
       <div className="App">
         <h1>I am a react app</h1>
-        <button onClick={this.switchNameHandler}>Switch Users</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My Hobbies: Racing</Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age}/>
+        <button onClick={ () => this.switchNameHandler('maximilian')}>Switch Users</button>
+        <Person 
+          name={this.state.persons[0].name} 
+          age={this.state.persons[0].age}/>
+        <Person 
+          name={this.state.persons[1].name} 
+          age={this.state.persons[1].age}
+          click={this.switchNameHandler.bind(this,'max')}>My Hobbies: Racing
+        </Person>
+        <Person 
+          name={this.state.persons[2].name} 
+          age={this.state.persons[2].age}/>
       </div>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'I am a react app')); // actual react code example
