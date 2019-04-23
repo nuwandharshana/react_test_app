@@ -16,8 +16,18 @@ class App extends Component {
     // this.state.persons[0].name = // dont use , react wont identify state changes to rerender dom
     this.setState({
       persons:[
+        {name:newName, age:40},
+        {name:"Hasantha Prabath", age:27},
+        {name:"Pramith Chathuranga", age:30},
+      ]
+    })
+  }
+
+  changeNameHandler = (event) =>{
+    this.setState({
+      persons:[
         {name:"Dhanushka Rumesh", age:40},
-        {name:newName, age:27},
+        {name:event.target.value, age:27},
         {name:"Pramith Chathuranga", age:30},
       ]
     })
@@ -36,7 +46,8 @@ class App extends Component {
         <Person 
           name={this.state.persons[1].name} 
           age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this,'max')}>My Hobbies: Racing
+          click={this.switchNameHandler.bind(this,'max')}
+          changed={this.changeNameHandler}>My Hobbies: Racing
         </Person>
         <Person 
           name={this.state.persons[2].name} 
