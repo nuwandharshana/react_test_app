@@ -34,12 +34,19 @@ class App extends Component {
   }
 
   render() {
+    const style = {
+      backgroundColor:'white',
+      font:'inherit',
+      border:'1px solid blue',
+      padding: '2px',
+      cursor: 'pointer'
+    }
     return (
       //use one root element
       //bind method is more efficient than () => this.switchNameHandler('maximilian')
       <div className="App">
         <h1>I am a react app</h1>
-        <button onClick={ () => this.switchNameHandler('maximilian')}>Switch Users</button>
+        <button style={style} onClick={ () => this.switchNameHandler('maximilian')}>Switch Users</button>
         <Person 
           name={this.state.persons[0].name} 
           age={this.state.persons[0].age}/>
