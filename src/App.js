@@ -5,33 +5,49 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons:[
-      {name:"Dhanushka", age:38},
-      {name:"Hasantha", age:26},
-      {name:"Pramith", age:29},
+      {id: 'asd',name:"Dhanushka", age:38},
+      {id: 'amn',name:"Hasantha", age:26},
+      {id: 'iuerw',name:"Pramith", age:29},
     ],
     otherState:'another state value',
     showPersons:false
   }
 
-  switchNameHandler = (newName) => {
-    // this.state.persons[0].name = // dont use , react wont identify state changes to rerender dom
+  // switchNameHandler = (newName) => {
+  //   // this.state.persons[0].name = // dont use , react wont identify state changes to rerender dom
+  //   this.setState({
+  //     persons:[
+  //       {name:newName, age:40},
+  //       {name:"Hasantha Prabath", age:27},
+  //       {name:"Pramith Chathuranga", age:30},
+  //     ]
+  //   })
+  // }
+
+  changeNameHandler = (event,id) =>{
+    const personIndex = this.state.persons.findIndex(elem =>{
+      return elem.id === id
+    })
+
+    const person = { ...this.state.persons[personIndex] }
+
+    person.name = event.target.value
+
+    const persons  = [...this.state.persons]
+
+    persons[personIndex] = person
+
     this.setState({
-      persons:[
-        {name:newName, age:40},
-        {name:"Hasantha Prabath", age:27},
-        {name:"Pramith Chathuranga", age:30},
-      ]
+      persons:persons
     })
   }
 
-  changeNameHandler = (event) =>{
-    this.setState({
-      persons:[
-        {name:"Dhanushka Rumesh", age:40},
-        {name:event.target.value, age:27},
-        {name:"Pramith Chathuranga", age:30},
-      ]
-    })
+  deletePersonHandler = (index) => {
+    // const persons = this.state.persons // const can be used because person just hold a reference but its a bad practice(mutating original array)
+    // const persons = this.state.persons.slice() // slice without parameters will give new array
+    const persons = [...this.state.persons] // using spread operator
+    persons.splice(index,1)
+    this.setState({persons:persons})
   }
 
   togglePersonsHandler = () => {
@@ -55,10 +71,15 @@ class App extends Component {
     if(this.state.showPersons){
       persons = (
         <div>
-          {this.state.persons.map(elem => {
+          {this.state.persons.map((elem,index) => {
             return <Person 
+            click={() => {
+              this.deletePersonHandler(index)
+            }}
             name={elem.name} 
-            age={elem.age}/>
+            age={elem.age}
+            key={elem.id}
+            changed={(event) => this.changeNameHandler(event,elem.id)}/>
           })}
           {/* <Person 
             name={this.state.persons[0].name} 
@@ -81,7 +102,7 @@ class App extends Component {
       //bind method is more efficient than () => this.switchNameHandler('maximilian')
       <div className="App">
         <h1>I am a react app</h1>
-        <button style={style} onClick={ () => this.switchNameHandler('maximilian')}>Switch Users</button>
+        {/* <button style={style} onClick={ () => this.switchNameHandler('maximilian')}>Switch Users</button> */}
         <button style={style} onClick={this.togglePersonsHandler}>Toggle Users</button>
         { persons }
       </div>
