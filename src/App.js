@@ -1,6 +1,5 @@
 import React, { Component } from 'react';//React is the default import, component is the named import
 import './App.css';
-import Radium, {StyleRoot} from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -65,11 +64,7 @@ class App extends Component {
       font:'inherit',
       border:'1px solid blue',
       padding: '2px',
-      cursor: 'pointer',
-      ':hover':{
-        backgroundColor:'lightgreen',
-        color:'black'
-      }
+      cursor: 'pointer'
     }
 
     let persons = null
@@ -99,16 +94,11 @@ class App extends Component {
       );
 
       style.backgroundColor = 'red'
-      style[':hover']={
-        backgroundColor:'salmon',
-        color:'black'
-      }
     }
 
     return (
       //use one root element
       //bind method is more efficient than () => this.switchNameHandler('maximilian')
-      <StyleRoot>
         <div className="App">
           <h1>I am a react app</h1>
           <p className={classes.join(' ')}>this is really working</p>
@@ -116,10 +106,9 @@ class App extends Component {
           <button style={style} onClick={this.togglePersonsHandler}>Toggle Users</button>
           { persons }
         </div>
-      </StyleRoot>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'I am a react app')); // actual react code example
   }
 }
 
-export default Radium(App);
+export default App;
