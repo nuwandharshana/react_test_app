@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react';//React is the default import, component is the named import
 import './App.css';
-import Radium from 'radium';
+import Radium, {StyleRoot} from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -108,13 +108,15 @@ class App extends Component {
     return (
       //use one root element
       //bind method is more efficient than () => this.switchNameHandler('maximilian')
-      <div className="App">
-        <h1>I am a react app</h1>
-        <p className={classes.join(' ')}>this is really working</p>
-        {/* <button style={style} onClick={ () => this.switchNameHandler('maximilian')}>Switch Users</button> */}
-        <button style={style} onClick={this.togglePersonsHandler}>Toggle Users</button>
-        { persons }
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>I am a react app</h1>
+          <p className={classes.join(' ')}>this is really working</p>
+          {/* <button style={style} onClick={ () => this.switchNameHandler('maximilian')}>Switch Users</button> */}
+          <button style={style} onClick={this.togglePersonsHandler}>Toggle Users</button>
+          { persons }
+        </div>
+      </StyleRoot>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'I am a react app')); // actual react code example
   }
