@@ -59,7 +59,8 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor:'white',
+      backgroundColor:'green',
+      color:'white',
       font:'inherit',
       border:'1px solid blue',
       padding: '2px',
@@ -67,6 +68,14 @@ class App extends Component {
     }
 
     let persons = null
+
+    const classes = []
+    if(this.state.persons.length<=2){
+      classes.push('red')
+    }
+    if(this.state.persons.length<=1){
+      classes.push('bold')
+    }
 
     if(this.state.showPersons){
       persons = (
@@ -81,20 +90,10 @@ class App extends Component {
             key={elem.id}
             changed={(event) => this.changeNameHandler(event,elem.id)}/>
           })}
-          {/* <Person 
-            name={this.state.persons[0].name} 
-            age={this.state.persons[0].age}/>
-          <Person 
-            name={this.state.persons[1].name} 
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this,'max')}
-            changed={this.changeNameHandler}>My Hobbies: Racing
-          </Person>
-          <Person 
-            name={this.state.persons[2].name} 
-            age={this.state.persons[2].age}/> */}
         </div>
       );
+
+      style.backgroundColor = 'red'
     }
 
     return (
@@ -102,6 +101,7 @@ class App extends Component {
       //bind method is more efficient than () => this.switchNameHandler('maximilian')
       <div className="App">
         <h1>I am a react app</h1>
+        <p className={classes.join(' ')}>this is really working</p>
         {/* <button style={style} onClick={ () => this.switchNameHandler('maximilian')}>Switch Users</button> */}
         <button style={style} onClick={this.togglePersonsHandler}>Toggle Users</button>
         { persons }
