@@ -10,7 +10,7 @@ class App extends Component {
       {name:"Pramith", age:29},
     ],
     otherState:'another state value',
-    showPersons:true
+    showPersons:false
   }
 
   switchNameHandler = (newName) => {
@@ -49,14 +49,12 @@ class App extends Component {
       padding: '2px',
       cursor: 'pointer'
     }
-    return (
-      //use one root element
-      //bind method is more efficient than () => this.switchNameHandler('maximilian')
-      <div className="App">
-        <h1>I am a react app</h1>
-        <button style={style} onClick={ () => this.switchNameHandler('maximilian')}>Switch Users</button>
-        <button style={style} onClick={this.togglePersonsHandler}>Toggle Users</button>
-        { this.state.showPersons? <div>
+
+    let persons = null
+
+    if(this.state.showPersons){
+      persons = (
+        <div>
           <Person 
             name={this.state.persons[0].name} 
             age={this.state.persons[0].age}/>
@@ -69,7 +67,18 @@ class App extends Component {
           <Person 
             name={this.state.persons[2].name} 
             age={this.state.persons[2].age}/>
-          </div> : null }
+        </div>
+      );
+    }
+
+    return (
+      //use one root element
+      //bind method is more efficient than () => this.switchNameHandler('maximilian')
+      <div className="App">
+        <h1>I am a react app</h1>
+        <button style={style} onClick={ () => this.switchNameHandler('maximilian')}>Switch Users</button>
+        <button style={style} onClick={this.togglePersonsHandler}>Toggle Users</button>
+        { persons }
       </div>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'I am a react app')); // actual react code example
