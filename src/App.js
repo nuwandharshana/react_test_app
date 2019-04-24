@@ -1,5 +1,5 @@
 import React, { Component } from 'react';//React is the default import, component is the named import
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -69,12 +69,12 @@ class App extends Component {
 
     let persons = null
 
-    const classes = []
+    const assignedClasses = []
     if(this.state.persons.length<=2){
-      classes.push('red')
+      assignedClasses.push(classes.red)
     }
     if(this.state.persons.length<=1){
-      classes.push('bold')
+      assignedClasses.push(classes.bold)
     }
 
     if(this.state.showPersons){
@@ -99,9 +99,9 @@ class App extends Component {
     return (
       //use one root element
       //bind method is more efficient than () => this.switchNameHandler('maximilian')
-        <div className="App">
+        <div className={classes.App}>
           <h1>I am a react app</h1>
-          <p className={classes.join(' ')}>this is really working</p>
+          <p className={assignedClasses.join(' ')}>this is really working</p>
           {/* <button style={style} onClick={ () => this.switchNameHandler('maximilian')}>Switch Users</button> */}
           <button style={style} onClick={this.togglePersonsHandler}>Toggle Users</button>
           { persons }
