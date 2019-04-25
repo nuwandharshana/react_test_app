@@ -23,11 +23,11 @@
   color: grey
 }
 
-.App button.red{
+.App button.Red{
   background-color: red;
 }
 
-.App button.red:hover {
+.App button.Red:hover {
   background-color: salmon;
   color: grey
 }

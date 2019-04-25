@@ -85,7 +85,7 @@ class App extends Component {
           })}
         </div>
       );
-      buttonClass = classes.red
+      buttonClass = classes.Red
     }
 
     return (
