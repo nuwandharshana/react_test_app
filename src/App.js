@@ -8,7 +8,7 @@ class App extends Component {
     persons:[
       {id: 'asd',name:"Dhanushka", age:38},
       {id: 'amn',name:"Hasantha", age:26},
-      {id: 'iuerw',name:"Pramith", age:29},
+      {id: 'iuerw',name:"Aruna", age:29},
     ],
     otherState:'another state value',
     showPersons:false
@@ -32,7 +32,7 @@ class App extends Component {
 
     const person = { ...this.state.persons[personIndex] }
 
-    person.name = event.target.value
+    person.name = event.target.value//get input value
 
     const persons  = [...this.state.persons]
 
