@@ -1,6 +1,6 @@
 import React, { Component } from 'react';//React is the default import, component is the named import
 import classes from './App.css';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
 
 class App extends Component {
   state = {
