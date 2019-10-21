@@ -61,15 +61,7 @@ class App extends Component {
   render() {
 
     let persons = null
-    let buttonClass = ''
 
-    const assignedClasses = []
-    if(this.state.persons.length<=2){
-      assignedClasses.push(classes.red)
-    }
-    if(this.state.persons.length<=1){
-      assignedClasses.push(classes.bold)
-    }
 
     if(this.state.showPersons){
       persons = (
@@ -77,16 +69,14 @@ class App extends Component {
           <Persons persons={this.state.persons} changed={this.changeNameHandler} delete={this.deletePersonHandler}/>
         </div>
       );
-      buttonClass = classes.Red
     }
 
     return (
       //use one root element
       //bind method is more efficient than () => this.switchNameHandler('maximilian')
         <div className={classes.App}>
-          <Cockpit btncls={buttonClass} clsnames={assignedClasses} click={this.togglePersonsHandler}/>
-          { this.state.showPersons? <div>
-          <Persons persons={this.state.persons} changed={this.changeNameHandler} delete={this.deletePersonHandler}/>
+          <Cockpit persons={this.state.persons} showpersons={this.state.showPersons} click={this.togglePersonsHandler}/>
+          { this.state.showPersons? <div><Persons persons={this.state.persons} changed={this.changeNameHandler} delete={this.deletePersonHandler}/>
         </div>: null }
         {/* {persons} */}
         </div>
