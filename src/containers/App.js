@@ -1,6 +1,7 @@
 import React, { Component } from 'react';//React is the default import, component is the named import
 import classes from './App.css';
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -73,16 +74,7 @@ class App extends Component {
     if(this.state.showPersons){
       persons = (
         <div>
-          {this.state.persons.map((elem,index) => {
-            return <Person 
-            click={() => {
-              this.deletePersonHandler(index)
-            }}
-            name={elem.name} 
-            age={elem.age}
-            key={elem.id}
-            changed={(event) => this.changeNameHandler(event,elem.id)}/>
-          })}
+          <Persons persons={this.state.persons} changed={this.changeNameHandler} delete={this.deletePersonHandler}/>
         </div>
       );
       buttonClass = classes.Red
@@ -92,11 +84,11 @@ class App extends Component {
       //use one root element
       //bind method is more efficient than () => this.switchNameHandler('maximilian')
         <div className={classes.App}>
-          <h1>I am a react app</h1>
-          <p className={assignedClasses.join(' ')}>this is really working</p>
-          {/* <button style={style} onClick={ () => this.switchNameHandler('maximilian')}>Switch Users</button> */}
-          <button className={buttonClass} onClick={this.togglePersonsHandler}>Toggle Users</button>
-          { persons }
+          <Cockpit btncls={buttonClass} clsnames={assignedClasses} click={this.togglePersonsHandler}/>
+          { this.state.showPersons? <div>
+          <Persons persons={this.state.persons} changed={this.changeNameHandler} delete={this.deletePersonHandler}/>
+        </div>: null }
+        {/* {persons} */}
         </div>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'I am a react app')); // actual react code example
