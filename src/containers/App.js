@@ -4,14 +4,36 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-  state = {
-    persons:[
-      {id: 'asd',name:"Dhanushka", age:38},
-      {id: 'amn',name:"Hasantha", age:26},
-      {id: 'iuerw',name:"Aruna", age:29},
-    ],
-    otherState:'another state value',
-    showPersons:false
+  constructor(props) {
+    super(props);
+    console.log('[App.js] inside constructor', props);
+    this.state = {
+      persons: [
+        { id: 'asd', name: "Dhanushka", age: 38 },
+        { id: 'amn', name: "Hasantha", age: 26 },
+        { id: 'iuerw', name: "Aruna", age: 29 },
+      ],
+      otherState: 'another state value',
+      showPersons: false
+    }
+  }
+  // modern versions will work this way but older react versions use constructor define state
+  // state = {
+  //   persons:[
+  //     {id: 'asd',name:"Dhanushka", age:38},
+  //     {id: 'amn',name:"Hasantha", age:26},
+  //     {id: 'iuerw',name:"Aruna", age:29},
+  //   ],
+  //   otherState:'another state value',
+  //   showPersons:false
+  // }
+
+  componentWillMount() {
+    console.log('[App.js] inside componentWillMount()');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] inside componentDidMount()');
   }
 
   // switchNameHandler = (newName) => {
@@ -25,8 +47,8 @@ class App extends Component {
   //   })
   // }
 
-  changeNameHandler = (event,id) =>{
-    const personIndex = this.state.persons.findIndex(elem =>{
+  changeNameHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(elem => {
       return elem.id === id
     })
 
@@ -34,12 +56,12 @@ class App extends Component {
 
     person.name = event.target.value//get input value
 
-    const persons  = [...this.state.persons]
+    const persons = [...this.state.persons]
 
     persons[personIndex] = person
 
     this.setState({
-      persons:persons
+      persons: persons
     })
   }
 
@@ -47,26 +69,26 @@ class App extends Component {
     // const persons = this.state.persons // const can be used because person just hold a reference but its a bad practice(mutating original array)
     // const persons = this.state.persons.slice() // slice without parameters will give new array
     const persons = [...this.state.persons] // using spread operator
-    persons.splice(index,1)
-    this.setState({persons:persons})
+    persons.splice(index, 1)
+    this.setState({ persons: persons })
   }
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons
     this.setState({
-      showPersons:!doesShow
+      showPersons: !doesShow
     })
   }
 
   render() {
-
+    console.log('[App.js] inside render()');
     let persons = null
 
 
-    if(this.state.showPersons){
+    if (this.state.showPersons) {
       persons = (
         <div>
-          <Persons persons={this.state.persons} changed={this.changeNameHandler} delete={this.deletePersonHandler}/>
+          <Persons persons={this.state.persons} changed={this.changeNameHandler} delete={this.deletePersonHandler} />
         </div>
       );
     }
@@ -74,12 +96,12 @@ class App extends Component {
     return (
       //use one root element
       //bind method is more efficient than () => this.switchNameHandler('maximilian')
-        <div className={classes.App}>
-          <Cockpit appTitle={this.props.appTitle} persons={this.state.persons} showpersons={this.state.showPersons} click={this.togglePersonsHandler}/>
-          { this.state.showPersons? <div><Persons persons={this.state.persons} changed={this.changeNameHandler} delete={this.deletePersonHandler}/>
-        </div>: null }
+      <div className={classes.App}>
+        <Cockpit appTitle={this.props.appTitle} persons={this.state.persons} showpersons={this.state.showPersons} click={this.togglePersonsHandler} />
+        {this.state.showPersons ? <div><Persons persons={this.state.persons} changed={this.changeNameHandler} delete={this.deletePersonHandler} />
+        </div> : null}
         {/* {persons} */}
-        </div>
+      </div>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'I am a react app')); // actual react code example
   }
