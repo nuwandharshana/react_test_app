@@ -36,6 +36,19 @@ class App extends Component {
     console.log('[App.js] inside componentDidMount()');
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] inside shouldComponentUpdate()', nextProps, nextState);
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] inside componentWillUpdate()', nextProps, nextState);
+  }
+
+  componentDidUpdate() {
+    console.log('[UPDATE App.js] inside componentDidUpdate()');
+  }
+
   // switchNameHandler = (newName) => {
   //   // this.state.persons[0].name = // dont use , react wont identify state changes to rerender dom
   //   this.setState({
