@@ -38,7 +38,7 @@ class App extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log('[UPDATE App.js] inside shouldComponentUpdate()', nextProps, nextState);
-    return true;
+    return nextState.persons !== this.state.persons || nextState.showPersons !== this.state.showPersons;// will trigger render function only there is ana change, this condition works because change values in immutable way
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -110,6 +110,7 @@ class App extends Component {
       //use one root element
       //bind method is more efficient than () => this.switchNameHandler('maximilian')
       <div className={classes.App}>
+        <button onClick={()=>this.setState({showPersons:true})}>show persons</button>
         <Cockpit appTitle={this.props.appTitle} persons={this.state.persons} showpersons={this.state.showPersons} click={this.togglePersonsHandler} />
         {this.state.showPersons ? <div><Persons persons={this.state.persons} changed={this.changeNameHandler} delete={this.deletePersonHandler} />
         </div> : null}
