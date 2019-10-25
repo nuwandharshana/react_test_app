@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';//React is the default import, comp
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
 
 class App extends PureComponent {
   constructor(props) {
@@ -110,13 +111,13 @@ class App extends PureComponent {
     return (
       //use one root element
       //bind method is more efficient than () => this.switchNameHandler('maximilian')
-      <div className={classes.App}>
+      <WithClass classes={classes.App}>
         <button onClick={()=>this.setState({showPersons:true})}>show persons</button>
         <Cockpit appTitle={this.props.appTitle} persons={this.state.persons} showpersons={this.state.showPersons} click={this.togglePersonsHandler} />
         {this.state.showPersons ? <div><Persons persons={this.state.persons} changed={this.changeNameHandler} delete={this.deletePersonHandler} />
         </div> : null}
         {/* {persons} */}
-      </div>
+      </WithClass>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'I am a react app')); // actual react code example
   }
