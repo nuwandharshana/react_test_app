@@ -16,7 +16,8 @@ class App extends PureComponent {
         { id: 'iuerw', name: "Aruna", age: 29 },
       ],
       otherState: 'another state value',
-      showPersons: false
+      showPersons: false,
+      toggleClicked:0
     }
   }
   // modern versions will work this way but older react versions use constructor define state
@@ -91,8 +92,11 @@ class App extends PureComponent {
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons
-    this.setState({
-      showPersons: !doesShow
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !doesShow,
+        toggleClicked:prevState.toggleClicked+1 //since setState fn call is an async fn, we need to use prevState
+      }
     })
   }
 
