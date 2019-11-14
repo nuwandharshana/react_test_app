@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';//React is the default import, comp
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+import Aux from '../hoc/Aux';
+import withClass from '../hoc/withClass';
 
 class App extends PureComponent {
   constructor(props) {
@@ -111,16 +112,16 @@ class App extends PureComponent {
     return (
       //use one root element
       //bind method is more efficient than () => this.switchNameHandler('maximilian')
-      <WithClass classes={classes.App}>
+      <Aux>
         <button onClick={()=>this.setState({showPersons:true})}>show persons</button>
         <Cockpit appTitle={this.props.appTitle} persons={this.state.persons} showpersons={this.state.showPersons} click={this.togglePersonsHandler} />
         {this.state.showPersons ? <div><Persons persons={this.state.persons} changed={this.changeNameHandler} delete={this.deletePersonHandler} />
         </div> : null}
         {/* {persons} */}
-      </WithClass>
+      </Aux>
     );
     // return React.createElement('div',{className:'App'},React.createElement('h1',null,'I am a react app')); // actual react code example
   }
 }
 
-export default App;
+export default withClass(App,classes.App);
