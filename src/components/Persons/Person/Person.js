@@ -16,6 +16,9 @@ class Person extends Component {
 
     componentDidMount() {
         console.log('[Person.js] inside componentDidMount()');
+        if(this.props.position===0){
+            this.inputElement.focus();// this is prefered on focus, media playback kind of stuff, dont use this as a work around (eg. element styling)
+        }
     }
     render() {
         console.log('[Person.js] inside render()');
@@ -23,7 +26,12 @@ class Person extends Component {
             <Aux>
                 <p onClick={this.props.click}>I am {this.props.name}. I am {this.props.age} years old.</p>
                 <p>{this.props.children}</p>
-                <input type="text" onChange={this.props.changed} value={this.props.name} />
+                <input
+                    ref={(inp)=>{this.inputElement=inp}}//make a reference on this element
+                    type="text"
+                    onChange={this.props.changed}
+                    value={this.props.name}
+                />
             </Aux>
         )
         //return array of component without using root element
@@ -35,7 +43,7 @@ class Person extends Component {
     }
 }
 
-Person.propTypes = {
+Person.propTypes = {//implement prop validations
     click:PropTypes.func,
     name:PropTypes.string,
     age:PropTypes.number,
