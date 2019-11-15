@@ -21,6 +21,11 @@ class Person extends Component {
             this.inputElement.current.focus();// this is prefered on focus, media playback kind of stuff, dont use this as a work around (eg. element styling)
         }
     }
+
+    focus(){
+        this.inputElement.current.focus();
+    }
+
     render() {
         console.log('[Person.js] inside render()');
         return (
@@ -51,4 +56,4 @@ Person.propTypes = {//implement prop validations
     changed:PropTypes.func
 }
 
-export default withClass(Person,classes.Person);
+export default Person;//need to remove hoc to make it work, unless we have to pass the reference
