@@ -56,4 +56,4 @@ Person.propTypes = {//implement prop validations
     changed:PropTypes.func
 }
 
-export default Person;//need to remove hoc to make it work, unless we have to pass the reference
+export default withClass(Person,classes.Person);//implement reference while having hoc
