@@ -7,6 +7,7 @@ import withClass from '../../../hoc/withClass';
 class Person extends Component {
     constructor(props) {
         super(props);
+        this.inputElement = React.createRef();//define input element reference using react built in components
         console.log('[Person.js] inside constructor', props);
     }
 
@@ -17,7 +18,7 @@ class Person extends Component {
     componentDidMount() {
         console.log('[Person.js] inside componentDidMount()');
         if(this.props.position===0){
-            this.inputElement.focus();// this is prefered on focus, media playback kind of stuff, dont use this as a work around (eg. element styling)
+            this.inputElement.current.focus();// this is prefered on focus, media playback kind of stuff, dont use this as a work around (eg. element styling)
         }
     }
     render() {
@@ -27,7 +28,7 @@ class Person extends Component {
                 <p onClick={this.props.click}>I am {this.props.name}. I am {this.props.age} years old.</p>
                 <p>{this.props.children}</p>
                 <input
-                    ref={(inp)=>{this.inputElement=inp}}//make a reference on this element
+                    ref={this.inputElement}//make a reference on this element
                     type="text"
                     onChange={this.props.changed}
                     value={this.props.name}
