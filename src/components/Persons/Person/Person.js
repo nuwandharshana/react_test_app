@@ -31,9 +31,9 @@ class Person extends Component {
         console.log('[Person.js] inside render()');
         return (
             <Aux>
-                {/* wrap the content with context element */}
+                {/* wrap the content with context element, auth is the value of the context */}
                 <AuthContext.Consumer>
-                    {auth=>auth?<p>I'm authenticated</p>:null} {/* auth is the value of the contexts*/}
+                    {auth=>auth?<p>I'm authenticated</p>:null}
                 </AuthContext.Consumer>
                 <p onClick={this.props.click}>I am {this.props.name}. I am {this.props.age} years old.</p>
                 <p>{this.props.children}</p>
