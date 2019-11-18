@@ -23,6 +23,7 @@ const cockpit = (props) => {
       <p className={assignedClasses.join(' ')}>this is really working</p>
       {/* <button style={style} onClick={ () => this.switchNameHandler('maximilian')}>Switch Users</button> */}
       <button className={buttonClass} onClick={props.click}>Toggle Users</button>
+      <button onClick={props.login} className='btn btn-success'>Login</button>
     </Aux>
   );
 }

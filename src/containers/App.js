@@ -5,6 +5,8 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import Aux from '../hoc/Aux';
 import withClass from '../hoc/withClass';
 
+export const AuthContext = React.createContext(false);{/*make available outside of the class*/}
+
 class App extends PureComponent {
   constructor(props) {
     super(props);
@@ -17,7 +19,8 @@ class App extends PureComponent {
       ],
       otherState: 'another state value',
       showPersons: false,
-      toggleClicked:0
+      toggleClicked:0,
+      authenticated:false
     }
   }
   // modern versions will work this way but older react versions use constructor define state
@@ -100,6 +103,10 @@ class App extends PureComponent {
     })
   }
 
+  loginHandler = () => {
+    this.setState({authenticated:true});
+  }
+
   render() {
     console.log('[App.js] inside render()');
     let persons = null
@@ -118,8 +125,8 @@ class App extends PureComponent {
       //bind method is more efficient than () => this.switchNameHandler('maximilian')
       <Aux>
         <button onClick={()=>this.setState({showPersons:true})}>show persons</button>
-        <Cockpit appTitle={this.props.appTitle} persons={this.state.persons} showpersons={this.state.showPersons} click={this.togglePersonsHandler} />
-        {this.state.showPersons ? <div><Persons persons={this.state.persons} changed={this.changeNameHandler} delete={this.deletePersonHandler} />
+        <Cockpit appTitle={this.props.appTitle} persons={this.state.persons} showpersons={this.state.showPersons} click={this.togglePersonsHandler} login={this.loginHandler} />
+        {this.state.showPersons ? <div><AuthContext.Provider value={this.state.authenticated}><Persons persons={this.state.persons} changed={this.changeNameHandler} delete={this.deletePersonHandler} /></AuthContext.Provider>{/*provide auth context*/}
         </div> : null}
         {/* {persons} */}
       </Aux>
