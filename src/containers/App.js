@@ -34,7 +34,7 @@ class App extends PureComponent {
   //   showPersons:false
   // }
 
-  componentWillMount() {
+  componentWillMount() {//react 16 discourage this functionality due to people use this incorrectly
     console.log('[App.js] inside componentWillMount()');
   }
 
@@ -48,12 +48,23 @@ class App extends PureComponent {
   //   return nextState.persons !== this.state.persons || nextState.showPersons !== this.state.showPersons;// will trigger render function only there is ana change, this condition works because change values in immutable way
   // }
 
-  componentWillUpdate(nextProps, nextState) {
+  componentWillUpdate(nextProps, nextState) {//react 16 discourage this functionality due to people use this incorrectly
     console.log('[UPDATE App.js] inside componentWillUpdate()', nextProps, nextState);
   }
 
   componentDidUpdate() {
     console.log('[UPDATE App.js] inside componentDidUpdate()');
+  }
+
+  //new react 16 lifecycle hooks
+  static getDerivedStateFromProps(nextProps,prevState){//triggers before render function
+    console.log('[UPDATE App.js] inside getDerivedStateFromProps() [introduced in react 16]',nextProps,prevState);
+    return prevState;
+  }
+
+  getSnapshotBeforeUpdate(){//trigger before componentDidUpdate
+    console.log('[UPDATE App.js] inside getSnapshotBeforeUpdate() [introduced in react 16] canbe used to retrieve snapshot of dom before update');
+    //eg. get user scroll position. after update we can set to previous position
   }
 
   // switchNameHandler = (newName) => {
